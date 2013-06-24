@@ -24,7 +24,7 @@
 					<li><a href="?p=instrucciones">Instrucciones<span>Del Test</span></a></li>
 					<li><a href="?p=testdli">Test DLI<span>Test de Prueba</span></a></li>
 					<li><a href="?p=creditos">Créditos<span>Desarrolladores</span></a></li>
-					<li><a href="?p=registro">Ingresar a DLI<span>Registro o Inicio de Sesión</span></a></li>
+					<li><a href="?p=ingresardli">Ingresar a DLI<span>Registro o Inicio de Sesión</span></a></li>
 				</ul>
 			</nav>
 		</header>

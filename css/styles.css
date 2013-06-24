@@ -45,7 +45,7 @@ nav .menu li {
 nav .menu li a {
 	display: inline-block;
 	margin: 0;
-	padding: 10px 15px;
+	padding: 10px 30px 15px 0;
 	color: #fff;
 	font-size: 18px;
 	text-decoration: none;
@@ -73,4 +73,69 @@ footer {
 
 footer h3 {
 	padding: 10px;
+}
+
+/*##########
+ ESTILOS DE INGRESAR A DLI
+##########*/
+
+.info {
+	margin: 50px 0 0 0;
+	float: left;
+	width: 450px;
+}
+
+.info p {
+	color: #fff;
+	font-size: 15px;
+	text-align: justify;
+}
+
+.info a.registrarse {
+	display: block;
+	margin: 20px 0 0 0;
+	padding: 10px;
+	width: 80%;
+	color: #fff;
+	background: green;
+	border: 1px solid green;
+	font-size: 15px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	text-decoration: none;
+}
+
+.new-session {
+	margin: 50px 0 0 60px;
+	float: left;
+	width: 450px;
+}
+
+#new-session-form{
+	margin-left: 20px;
+}
+
+#new-session-form .field {
+	margin: 0 0 10px 0;
+	width: 100%;
+}
+
+#new-session-form .field input[type=text],
+#new-session-form .field input[type=password] {
+	padding: 10px;
+	border: 1px solid #ccc;
+	width: 70%;
+}
+
+#new-session-form .field input[type=submit] {
+	padding: 10px 25px;
+	border: 1px solid green;
+	color: #fff;
+	background: green;
+	cursor: pointer;
+}
+
+#new-session-form .field input[type=submit]:hover {
+	background: #01b201;
 }
