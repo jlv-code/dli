@@ -5,6 +5,16 @@
 	if ($_GET['p'])
 		$p = strip_tags($_GET['p']);
 
+	if ($_SESSION['userid']):
+		$href = '?p=cerrarsesion';
+		$link = 'Cerrar Sesión';
+		$description = 'Usuario: '.$_SESSION['userid'];
+	else:
+		$href = '?p=ingresardli';
+		$link = 'Ingresar a DLI';
+		$description = 'Registro o Inicio de Sesión';
+	endif;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +34,7 @@
 					<li><a href="?p=instrucciones">Instrucciones<span>Del Test</span></a></li>
 					<li><a href="?p=testdli">Test DLI<span>Test de Prueba</span></a></li>
 					<li><a href="?p=creditos">Créditos<span>Desarrolladores</span></a></li>
-					<li><a href="?p=ingresardli">Ingresar a DLI<span>Registro o Inicio de Sesión</span></a></li>
+					<li><a href="<?php print $href; ?>"><?php print $link; ?><span><?php print $description; ?></span></a></li>
 				</ul>
 			</nav>
 		</header>
