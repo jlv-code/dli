@@ -14,6 +14,20 @@
 			return $this->getContentASSOC($sql);
 		}
 
+		public function createuser(){
+			$ins = "INSERT INTO usuarios (
+					cedula,
+					apellidos,
+					nombres,
+					clave) VALUES (
+					'{$this->user['cedula']}',
+					'{$this->user['apellidos']}',
+					'{$this->user['nombres']}',
+					MD5('{$this->user['clave']}'))returning cedula;";
+			$this->dbConection();
+			return $this->getContentASSOC($ins);
+		}
+
 	}
 
  ?>
