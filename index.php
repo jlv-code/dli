@@ -41,9 +41,9 @@
 		<div id="content">
 			<?php include 'views/'.$p.'.php' ?>
 		</div>
-		<footer>
+		<!--<footer>
 			<h3>DLI 2013 - Todos los derechos reservados.</h3>
-		</footer>
+		</footer>-->
 	</div>
 </body>
 </html>
