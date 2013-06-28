@@ -3,10 +3,12 @@
 	class db {
 
 		private $conection;
-		private $param = array();
+		//private $param = array();
 
-		public function dbConection(){
-			require '../config/dbconfig.php';
+		public function dbConection($db=''){
+			if (!is_array($db))
+				require '../config/dbconfig.php';
+
 			$stringcon = "host=".$db['db_serv']." dbname=".$db['db_name']." user=".$db['db_user']." password=".$db['db_pass'];
 	    	$this->conection = pg_pconnect($stringcon) or die ("No hay Conexión con el Servidor!");
 		}
