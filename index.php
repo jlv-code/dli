@@ -4,6 +4,8 @@
 
 	if ($_GET['p'])
 		$p = strip_tags($_GET['p']);
+	else
+		$p = 'partescomputador';
 
 	if ($_SESSION['userid']):
 		$href = '?p=cerrarsesion';
