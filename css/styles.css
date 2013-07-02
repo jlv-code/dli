@@ -130,7 +130,7 @@ footer h3 {
 	border: 1px solid #ccc;
 }
 
-.field input[type=submit] {
+input[type=submit] {
 	padding: 10px 25px;
 	width: 40% !important;
 	border: 1px solid green;
@@ -139,7 +139,7 @@ footer h3 {
 	cursor: pointer;
 }
 
-#new-session-form .field input[type=submit]:hover {
+input[type=submit]:hover {
 	background: #01b201;
 }
 
@@ -151,4 +151,52 @@ footer h3 {
 	margin: 50px auto;
 	padding: 0;
 	width: 400px;
+}
+
+/*##########
+ ESTILOS DEL TEST
+##########*/
+
+.wrap-test {
+	display: block;
+	padding: 20px;
+	background: #aaa;
+}
+
+.item {
+	display: inline-block;
+	margin: 15px 0;
+	width: 100%;
+}
+
+.item .question {
+	display: block;
+	margin: 0 0 10px 0;
+}
+
+.item .question p {
+	color: #000;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.item .options {
+	display: block;
+}
+
+.item .options input {
+	display: inline-block;
+}
+
+.item .options label {
+	display: inline-block;
+	width: 97%;
+}
+
+/*##########
+ ESTILOS DEL TEST
+##########*/
+
+#resultado {
+	margin: 15px 0 0 0;
 }

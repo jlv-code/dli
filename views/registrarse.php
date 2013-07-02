@@ -1,9 +1,28 @@
 <?php 
 
+	/*
+	VISTA RESGISTRASE
+
+	Esta vista se encarga de mostrar un formulario con los datos
+	basicos para que un usuario se registre
+	*/
+	
 	session_start();
+
+	/*
+	Verificacion de usuario logeado
+	*/
 
 	if ($_SESSION['userid']!='')
 		header('location:?p=testdli');
+
+	/*
+	Se almacenan los datos en una variable de sesion para luego ser verificados
+	que no esten vacios y luego enviados al controlador de rearusuario.php.
+
+	Si algun campo esta vacio la vista dara un mensaje respectivo, de estar todo bien
+	envia los datos al controlador para procesarlos.
+	*/
 
 	if ($_POST){
 		$_SESSION['newuser'] = $_POST;
@@ -21,6 +40,10 @@
 	}
 
 ?>
+
+<!--
+Aqui se muestra todo el HTML necesario para el registro del usuario.
+-->
 
 <div class="wrap-form">
 	<form id="new-user-form" name="new-user-form" method="post">
