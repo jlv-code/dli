@@ -22,7 +22,45 @@
 			require 'config/dbconfig.php';
 			$this->dbConection($db);
 			
-			return $this->getContentASSOC($sql);
+			return $this->createtest($this->getContentASSOC($sql));
+		}
+
+		/*
+		Metodo CreateTest
+
+		Este metodo se encarga de recibir los datos de la base de datos
+		para luego crear el html necesario para la vista
+		*/
+
+		public function createtest($test){
+			$num = array();
+			do {
+				$n = rand(0,19);
+				if (!in_array($n, $num))
+					$num[] = $n;
+			} while (count($num)<20);
+
+			$questions = '';
+			for($i=0;$i<count($num);$i++){
+				if ($test[$num[$i]]['respuesta3']!='n/a') {
+					$r3 = '<input type="radio" name="q['.$test[$num[$i]]['id'].']" value="3"><label>'.$test[$num[$i]]['respuesta3'].'</label>';
+				} else {
+					$r3 = '';
+				}
+				$questions .= '
+					<div class="item">
+						<div class="question">
+							<p>'.($i+1).'.- '.$test[$num[$i]]['pregunta'].'</p>
+						</div>
+						<div class="options">
+							<input type="radio" name="q['.$test[$num[$i]]['id'].']" value="1"><label>'.$test[$num[$i]]['respuesta1'].'</label>
+							<input type="radio" name="q['.$test[$num[$i]]['id'].']" value="2"><label>'.$test[$num[$i]]['respuesta2'].'</label>
+							'.$r3.'
+						</div>
+					</div>
+				';
+			}
+			return $questions;
 		}
 
 		/*
@@ -39,7 +77,11 @@
 		*/
 
 		public function verifytest($results){
-			$sql = "select correcta from test;";
+			$questions = array_keys($results['q']);
+			$strquestions = implode(',', $questions);
+			$results = array_values($results['q']);
+
+			$sql = "select * from test where id in ({$strquestions});";
 			require '../config/dbconfig.php';
 			$this->dbConection();
 
@@ -51,11 +93,34 @@
 			$totalQ = count($rights);
 
 			for($i=0;$i<$totalQ;$i++){
-				if ($rights[$i]['correcta']==$results['q'][$i]):
+				if ($rights[$i]['correcta']==$results[$i]):
 					$final['corrects']+=1;
+					$bg = 'lightgreen';
 				else:
 					$final['incorrects']+=1;
+					$bg = '#ff6060';
 				endif;
+
+				if ($bg == '#ff6060'):
+					$correcta = '<label style="clear:both">
+									<p><br>La respuesta correcta es:<br>'.$rights[$i]['respuesta'.$rights[$i]['correcta']].'</p>
+									<a href="index.php?p=partescomputador#'.$rights[$i]['localizador'].'">Presione aquí para llevarlo al lugar de la respuesta correcta</a>
+								</label>';
+				else:
+					$correcta = '';
+				endif;
+
+				$final['html'] .= '
+					<div class="item" style="width:98%;padding:1%;background:'.$bg.';">
+						<div class="question">
+							<p>'.($i+1).'.- '.$rights[$i]['pregunta'].'</p>
+						</div>
+						<div class="options">
+							<label style="clear:both">'.$rights[$i]['respuesta'.$results[$i]].'</label>
+							'.$correcta.'
+						</div>
+					</div>
+				';
 			}
 
 			if (ceil($totalQ/2)<=$final['corrects']):

@@ -24,11 +24,14 @@
 		header('location:index.php?p=ingresardli');
 
 	if ($_POST){
-		$_SESSION['test'] = $_POST;
-		if (isset($_SESSION['test']))
-			header('location:controllers/test.php');
-	}
-
+		if (count($_POST['q'])<20):
+			$_SESSION['msg_err'] = 'Debe completar todas las preguntas para poder ser evaluado.';
+		else:
+			$_SESSION['test'] = $_POST;
+			if (isset($_SESSION['test']))
+				header('location:controllers/test.php');
+		endif;
+	} 
 	/*
 	Si existe algun usuario logeado entonces la vista llama a un controlador llamado TEST.PHP
 	*/
@@ -37,31 +40,14 @@
 
 	/*
 	Se crea un nuevo TEST, lo que permite obtener de la base de datos las preguntas y posibles 
-	respuestas.
+	respuestas incluyendo el html para dicha vista.
 	*/
-
-	$test = $newtest;
-
-	/*
-	Usando los datos que obtenemos de la base de datos creamos la vista en HTML para mostrar
-	el TEST
-	*/
-
-	$questions = '';
-	for($i=0;$i<count($test);$i++){
-		$questions .= '
-			<div class="item">
-				<div class="question">
-					<p>'.$test[$i]['pregunta'].'</p>
-				</div>
-				<div class="options">
-					<input type="radio" name="q['.$i.']" value="1"><label>'.$test[$i]['respuesta1'].'</label>
-					<input type="radio" name="q['.$i.']" value="2"><label>'.$test[$i]['respuesta2'].'</label>
-					<input type="radio" name="q['.$i.']" value="3"><label>'.$test[$i]['respuesta3'].'</label>
-				</div>
-			</div>
-		';
-	}
+	if ($_SESSION['html']!=''):
+		$questions = $_SESSION['html'];
+		unset($_SESSION['html']);
+	else:
+		$questions = $newtest;
+	endif;	
 
 ?>
 <!--
@@ -76,6 +62,7 @@ Aqui imprimimos toda la vista del TEST
 
 			print ($msg_err)?$msg_err:$_SESSION['msg_err'];
 			unset($_SESSION['msg_err']);
+
 		?></p>
 	<form id="test-form" name="test-form" method="post">
 		<?php print $questions; ?>

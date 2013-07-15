@@ -48,6 +48,7 @@
 		*/
 
 		$newtest = $test->maketest();
+
 	}
 
 	/*
@@ -76,6 +77,8 @@
 		*/
 
 		$result = $test->verifytest($_SESSION['test']);
+
+		$_SESSION['html'] = $result['html'];
 
 		/*
 		Se genera un mensaje de Aprobado o Reprobado dependiendo sea el caso
